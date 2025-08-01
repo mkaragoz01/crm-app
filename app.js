@@ -6,6 +6,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 
 const authRoutes = require('./routes/authRoutes');
+const customerRoutes = require('./routes/customerRoutes');
+
 
 
 dotenv.config();
@@ -15,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/customers', customerRoutes);
 
 app.get('/', (req, res) => {
   res.send("🚀 CRM Backend aktif");
