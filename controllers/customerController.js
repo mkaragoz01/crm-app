@@ -38,3 +38,69 @@ exports.getMyCustomers = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.updateCustomer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, phone, company, notes } = req.body;
+
+    const customer = await Customer.findById(id);
+    if (!customer) return res.status(404).json({ message: "Müşteri bulunamadı" });
+
+    if (customer.createdBy.toString() !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({ message: "Bu müşteri üzerinde işlem yapma izniniz yok" });
+    }
+
+    customer.name = name || customer.name;
+    customer.email = email || customer.email;
+    customer.phone = phone || customer.phone;
+    customer.company = company || customer.company;
+    customer.notes = notes || customer.notes;
+
+    await customer.save();
+
+    res.status(200).json({ message: "Müşteri başarıyla güncellendi", customer });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.deleteCustomer = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const customer = await Customer.findById(id);
+    if (!customer) {
+      return res.status(404).json({ message: "Müşteri bulunamadı" });
+    }
+
+    if (customer.createdBy.toString() !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({ message: "Bu müşteri üzerinde işlem yapma izniniz yok" });
+    }
+
+    await customer.deleteOne();
+    res.status(200).json({ message: "Müşteri başarıyla silindi" });
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getCustomerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const customer = await Customer.findById(id);
+    if (!customer) {
+      return res.status(404).json({ message: "Müşteri bulunamadı" });
+    }
+
+    if (customer.createdBy.toString() !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({ message: "Bu müşteri üzerinde işlem yapma izniniz yok" });
+    }
+
+    res.status(200).json(customer);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
