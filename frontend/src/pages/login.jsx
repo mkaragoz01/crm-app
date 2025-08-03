@@ -1,57 +1,57 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   const [error, setError] = useState('');
-  
-  const handleLogin = async (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password })
       });
 
-      const data = await res.json();
+      const data = await response.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || 'Giriş başarısız');
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        navigate('/dashboard');
+      } else {
+        setError(data.message || 'Giriş başarısız.');
       }
-
-      localStorage.setItem('token', data.token);
-      alert('Giriş başarılı!');
     } catch (err) {
-      setError(err.message);
+      setError('Sunucuya bağlanılamadı.');
     }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', marginTop: 50 }}>
-      <h2>Giriş Yap</h2>
-      <form onSubmit={handleLogin}>
+    <div>
+      <h2>Giriş</h2>
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="E-posta"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        /><br/><br/>
+        /><br />
         <input
           type="password"
           placeholder="Şifre"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        /><br/><br/>
+        /><br />
         <button type="submit">Giriş Yap</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
-};
-
-export default Login;
+}

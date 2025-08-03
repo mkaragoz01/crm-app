@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar.jsx';
-
+import{ useNavigate } from 'react-router-dom';
 
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const fetchCustomers = async () => {
     try {
@@ -53,12 +54,13 @@ const handleDelete = async (id) => {
       <h2>Müşteri Listesi</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
-        {customers.map((c) => (
+         {customers.map((c) => (
             <li key={c._id}>
-            {c.name} - {c.email} - {c.phone}
-            <button onClick={() => handleDelete(c._id)}>Sil</button>
+              {c.name} - {c.email} - {c.phone}
+              <button onClick={() => navigate(`/customers/edit/${c._id}`)}>Güncelle</button>
+              <button onClick={() => handleDelete(c._id)}>Sil</button>
             </li>
-        ))}
+          ))}
         </ul>
     </div>
   );
