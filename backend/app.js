@@ -7,8 +7,7 @@ const connectDB = require('./config/db');
 
 const authRoutes = require('./routes/authRoutes');
 const customerRoutes = require('./routes/customerRoutes');
-
-
+const opportunityRoutes = require('./routes/opportunityRoutes');
 
 dotenv.config();
 connectDB();
@@ -18,6 +17,8 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/customers', customerRoutes);
+app.use('/api/opportunities', opportunityRoutes);
+
 
 app.get('/', (req, res) => {
   res.send("🚀 CRM Backend aktif");

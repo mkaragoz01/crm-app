@@ -66,7 +66,7 @@ const AddCustomer = () => {
           required
         /><br /><br />
         <input
-          type="text"
+          type="tel"
           name="phone"
           placeholder="Telefon"
           value={form.phone}
@@ -81,6 +81,7 @@ const AddCustomer = () => {
           onChange={handleChange}
         /><br /><br />
         <textarea
+          type="text"
           name="notes"
           placeholder="Notlar"
           value={form.notes}

@@ -56,11 +56,11 @@ const UpdateCustomer = () => {
         <Navbar />
       <h2>Müşteri Güncelle</h2>
       <form onSubmit={handleSubmit}>
-        <input name="name" value={form.name} onChange={handleChange} required /><br /><br />
-        <input name="email" value={form.email} onChange={handleChange} required /><br /><br />
-        <input name="phone" value={form.phone} onChange={handleChange} required /><br /><br />
-        <input name="company" value={form.company} onChange={handleChange} /><br /><br />
-        <textarea name="notes" value={form.notes} onChange={handleChange} rows="3" /><br /><br />
+        <input type="text" name="name" value={form.name} onChange={handleChange} required /><br /><br />
+        <input type="email" name="email" value={form.email} onChange={handleChange} required /><br /><br />
+        <input type="tel" name="phone" value={form.phone} onChange={handleChange} required /><br /><br />
+        <input type="text" name="company" value={form.company} onChange={handleChange} /><br /><br />
+        <textarea type="text" name="notes" value={form.notes} onChange={handleChange} rows="3" /><br /><br />
         <button type="submit">Güncelle</button>
       </form>
       {message && <p style={{ color: 'green' }}>{message}</p>}
