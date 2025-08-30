@@ -45,7 +45,7 @@ const AddCustomer = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', marginTop: 20 }}>
+     <div style={{ padding: 20 }}>
         <Navbar />
       <h2>Yeni Müşteri Ekle</h2>
       <form onSubmit={handleSubmit}>

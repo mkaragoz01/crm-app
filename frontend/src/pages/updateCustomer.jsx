@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar from '../components/navbar.jsx';
 
 const UpdateCustomer = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '', email: '', phone: '', company: '', notes: ''
   });
@@ -46,13 +47,14 @@ const UpdateCustomer = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       setMessage('Güncelleme başarılı!');
+      setTimeout(() => navigate("/customers"), 1000);
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', marginTop: 20 }}>
+     <div style={{ padding: 20 }}>
         <Navbar />
       <h2>Müşteri Güncelle</h2>
       <form onSubmit={handleSubmit}>

@@ -13,6 +13,8 @@ const Navbar = () => {
     <nav style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
       <Link to="/customers">Müşteriler</Link>
       <Link to="/customers/new">Yeni Müşteri</Link>
+      <Link to="/opportunities">Fırsatlar</Link>
+      <Link to="/opportunities/new">Yeni Fırsatlar</Link>
       <button onClick={handleLogout}>Çıkış</button>
     </nav>
   );

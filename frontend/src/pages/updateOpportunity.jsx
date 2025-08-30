@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Navbar from '../components/navbar.jsx';
 
-const OpportunityEdit = () => {
+const UpdateOpportunity = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -58,7 +59,8 @@ const OpportunityEdit = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", marginTop: 20 }}>
+     <div style={{ padding: 20 }}>
+        <Navbar />
       <h2>Fırsat Güncelle</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -94,4 +96,4 @@ const OpportunityEdit = () => {
   );
 };
 
-export default OpportunityEdit;
+export default UpdateOpportunity;

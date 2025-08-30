@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/navbar.jsx';
+
 
 const OpportunitiesList = () => {
   const [opportunities, setOpportunities] = useState([]);
@@ -61,7 +63,8 @@ const OpportunitiesList = () => {
   if (loading) return <p>Yükleniyor...</p>;
 
   return (
-    <div>
+     <div style={{ padding: 20 }}>
+        <Navbar />
       <h1>Fırsatlar</h1>
       <table border="1" cellPadding="8">
         <thead>

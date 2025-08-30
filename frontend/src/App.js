@@ -7,8 +7,8 @@ import AddCustomer from './pages/addCustomer.jsx';
 import UpdateCustomer from './pages/updateCustomer.jsx';
 import PrivateRoute from './components/privateRoute.jsx';
 import OpportunitiesList from './pages/opportunitiesList.jsx';
-import AddOpportunite from './pages/addOpportunity.jsx';
-import OpportunityEdit from './pages/editOpportunity.jsx';
+import AddOpportunity from './pages/addOpportunity.jsx';
+import UpdateOpportunity from './pages/updateOpportunity.jsx';
 
 function App() {
   const isAuthenticated = Boolean(localStorage.getItem('token'));
@@ -16,9 +16,22 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/customers" />} />
-        <Route path="/login" element={<Login />} />
-
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <PrivateRoute>
+                <CustomerList />
+              </PrivateRoute>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/customers" replace /> : <Login />}
+        />
         <Route
           path="/customers"
           element={
@@ -53,13 +66,13 @@ function App() {
         />
         <Route path="/opportunities/new" element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
-              <AddOpportunite />
+              <AddOpportunity />
             </PrivateRoute>
           }
         />
         <Route path="/opportunities/edit/:id" element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
-              <OpportunityEdit />
+              <UpdateOpportunity />
             </PrivateRoute>
           }
         />

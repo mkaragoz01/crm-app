@@ -58,8 +58,8 @@ const AddOpportunity = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', marginTop: 20 }}>
-      <Navbar />
+     <div style={{ padding: 20 }}>
+        <Navbar />
       <h2>Yeni Fırsat Ekle</h2>
       <form onSubmit={handleSubmit}>
         <input
