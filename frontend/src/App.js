@@ -10,6 +10,7 @@ import OpportunitiesList from './pages/opportunitiesList.jsx';
 import AddOpportunity from './pages/addOpportunity.jsx';
 import UpdateOpportunity from './pages/updateOpportunity.jsx';
 
+
 function App() {
   const isAuthenticated = Boolean(localStorage.getItem('token'));
 

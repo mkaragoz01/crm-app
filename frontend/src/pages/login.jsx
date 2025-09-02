@@ -24,6 +24,7 @@ const Login = () => {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         navigate('/');
+        window.location.reload();
       } else {
         setError(data.message || 'Giriş başarısız.');
       }
